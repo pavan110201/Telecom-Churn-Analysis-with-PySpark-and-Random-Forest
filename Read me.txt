@@ -1,0 +1,1 @@
+Using PySpark, we created a Spark session and performed one-hot encoding, vector assembly, and used a Random Forest classifier for telecom churn analysis. We found correlations between features and created new features, visualizing the results with a heat map. Additionally, we saved the model weights and developed a front end using Flask.
