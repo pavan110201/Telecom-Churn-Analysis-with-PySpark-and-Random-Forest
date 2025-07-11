@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Telecom Churn Prediction</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  </head>
+  <body class='w-screen h-screen  overflow-y-scroll ' style="font-family: Ubuntu, sans-serif;">
+    <h1 class='mt-12 text-center text-[40px] mb-6 text-blue-600'>Telecom Churn Prediction</h1>
+    {% if prediction is not none %}
+    <div class="flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert">
+      <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+      </svg>
+      <div>
+        <span class="font-medium">Prediction Result!</span>  {{ 'Churn' if prediction == 1 else 'No Churn' }}
+      </div>
+    </div>
+{% endif %}
+    <form action="/" method="post" class='max-w-sm mx-auto py-12 '>
+      <label class='block mb-2 text-sm font-medium text-gray-900' class='block mb-2 text-sm font-medium text-gray-900' for="gender">Gender:</label>
+      <select id="gender" name="gender" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ">
+        <option value="Male">Male</option>
+        <option value="Female">Female</option></select
+      ><br />
+
+      <label class='block mb-2 text-sm font-medium text-gray-900' class='block mb-2 text-sm font-medium text-gray-900 dark:text-white' for="SeniorCitizen">Senior Citizen:</label>
+      <select id="SeniorCitizen" name="SeniorCitizen" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ">
+        <option value="0">No</option>
+        <option value="1">Yes</option></select
+      ><br />
+
+      <label class='block mb-2 text-sm font-medium text-gray-900' for="Partner">Partner:</label>
+      <select id="Partner" name="Partner" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ">
+        <option value="No">No</option>
+        <option value="Yes">Yes</option></select
+      ><br />
+
+      <label class='block mb-2 text-sm font-medium text-gray-900' for="Dependents">Dependents:</label>
+      <select id="Dependents" name="Dependents" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ">
+        <option value="No">No</option>
+        <option value="Yes">Yes</option></select
+      ><br />
+
+      <label class='block mb-2 text-sm font-medium text-gray-900' for="tenure">Tenure (months):</label>
+      <input
+        type="number"
+        id="tenure"
+        name="tenure"
+        min="1"
+        max="72"
+        step="1"
+        placeholder="e.g. 12"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  "
+      /><br />
+
+      <label class='block mb-2 text-sm font-medium text-gray-900' for="PhoneService">Phone Service:</label>
+      <select id="PhoneService" name="PhoneService" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ">
+        <option value="No">No</option>
+        <option value="Yes">Yes</option></select
+      ><br />
+
+      <label class='block mb-2 text-sm font-medium text-gray-900' for="MultipleLines">Multiple Lines:</label>
+      <select id="MultipleLines" name="MultipleLines" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ">
+        <option value="No">No</option>
+        <option value="Yes">Yes</option>
+        <option value="No phone service">No phone service</option></select
+      ><br />
+
+      <label class='block mb-2 text-sm font-medium text-gray-900' for="InternetService">Internet Service:</label>
+      <select id="InternetService" name="InternetService" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ">
+        <option value="DSL">DSL</option>
+        <option value="Fiber optic">Fiber optic</option>
+        <option value="No">No</option></select
+      ><br />
+
+      <label class='block mb-2 text-sm font-medium text-gray-900' for="OnlineSecurity">Online Security:</label>
+      <select id="OnlineSecurity" name="OnlineSecurity" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ">
+        <option value="No">No</option>
+        <option value="Yes">Yes</option>
+        <option value="No internet service">No internet service</option></select
+      ><br />
+
+      <label class='block mb-2 text-sm font-medium text-gray-900' for="OnlineBackup">Online Backup:</label>
+      <select id="OnlineBackup" name="OnlineBackup" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ">
+        <option value="No">No</option>
+        <option value="Yes">Yes</option>
+        <option value="No internet service">No internet service</option></select
+      ><br />
+
+      <label class='block mb-2 text-sm font-medium text-gray-900' for="DeviceProtection">Device Protection:</label>
+      <select id="DeviceProtection" name="DeviceProtection" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ">
+        <option value="No">No</option>
+        <option value="Yes">Yes</option>
+        <option value="No internet service">No internet service</option></select
+      ><br />
+
+      <label class='block mb-2 text-sm font-medium text-gray-900' for="TechSupport">Tech Support:</label>
+      <select id="TechSupport" name="TechSupport" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ">
+        <option value="No">No</option>
+        <option value="Yes">Yes</option>
+        <option value="No internet service">No internet service</option></select
+      ><br />
+
+      <label class='block mb-2 text-sm font-medium text-gray-900' for="StreamingTV">Streaming TV:</label>
+      <select id="StreamingTV" name="StreamingTV" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ">
+        <option value="No">No</option>
+        <option value="Yes">Yes</option>
+        <option value="No internet service">No internet service</option></select
+      ><br />
+
+      <label class='block mb-2 text-sm font-medium text-gray-900' for="StreamingMovies">Streaming Movies:</label>
+      <select id="StreamingMovies" name="StreamingMovies" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ">
+        <option value="No">No</option>
+        <option value="Yes">Yes</option>
+        <option value="No internet service">No internet service</option></select
+      ><br />
+      <label class='block mb-2 text-sm font-medium text-gray-900' for="Contract">Contract</label>
+      <select id="Contract" name="Contract" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ">
+        <option value="Month-to-month">Month-to-month</option>
+        <option value="One year">One year</option>
+        <option value="Two years">Two years</option>
+    </select><br>
+
+    <label class='block mb-2 text-sm font-medium text-gray-900' for="PaperlessBilling">Paperless Billing:</label>
+    <select id="PaperlessBilling" name="PaperlessBilling" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ">
+        <option value="No">No</option>
+        <option value="Yes">Yes</option>
+    </select><br>
+
+    <label class='block mb-2 text-sm font-medium text-gray-900' for="PaymentMethod">Payment Method:</label>
+    <select id="PaymentMethod" name="PaymentMethod" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ">
+        <option value="Electronic check">Electronic check</option>
+        <option value="Mailed check">Mailed check</option>
+        <option value="Bank transfer (automatic)">Bank transfer (automatic)</option>
+        <option value="Credit card (automatic)">Credit card (automatic)</option>
+    </select><br>
+
+    <label class='block mb-2 text-sm font-medium text-gray-900' for="MonthlyCharges">Monthly Charges ($):</label>
+    <input type="text" id="MonthlyCharges" name="MonthlyCharges" placeholder="e.g., 79.99" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  "><br>
+
+    <label class='block mb-2 text-sm font-medium text-gray-900' for="TotalCharges">Total Charges ($):</label>
+    <input type="text" id="TotalCharges" name="TotalCharges" placeholder="e.g., 299.99" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  "><br>
+
+    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Predict Churn</button>
+</form>
+
+</body>
+</html>
+
+  
+  </body>
+</html>

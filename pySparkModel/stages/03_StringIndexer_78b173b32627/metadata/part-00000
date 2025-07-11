@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.StringIndexerModel","timestamp":1714157947048,"sparkVersion":"3.5.1","uid":"StringIndexer_78b173b32627","paramMap":{"outputCol":"PhoneService_indexed","inputCol":"PhoneService","handleInvalid":"keep"},"defaultParamMap":{"outputCol":"StringIndexer_78b173b32627__output","stringOrderType":"frequencyDesc","handleInvalid":"error"}}
